@@ -1,11 +1,6 @@
 //import TrashImage from "../images/Trash.svg";
 
 export default function Cards({ name, link, counter = 0, onCardClick }) {
-  //const handleZoomImageClick = () => {
-  //  document.querySelector(".popup_zoom").classList.add("popup_opened");
-  //popup.classList.add("popup_opened ");
-  // };
-
   const handleZoomImageClick = () => {
     onCardClick();
   };

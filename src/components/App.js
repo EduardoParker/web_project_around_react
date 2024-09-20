@@ -19,23 +19,20 @@ function App() {
   //handles para los popups
 
   //variable de estado y handle popup para perfile
-  /*
+
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
     React.useState(false);
 
   const onEditProfileClick = () => {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    console.log(isEditProfilePopupOpen);
-  };*/
-
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
+    setIsEditProfilePopupOpen(true);
+    //console.log(isEditProfilePopupOpen);
+  };
 
   //variable de estado y popup para addplace
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
 
   const onAddPlaceClick = () => {
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
+    setIsAddPlacePopupOpen(true);
     //const isAddPlacePopupOpen
   };
 
@@ -44,18 +41,18 @@ function App() {
     React.useState(false);
 
   const onEditAvatarClick = () => {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-    //const isEditAvatarPopupOpen
+    setIsEditAvatarPopupOpen(true);
   };
 
   const onCardClick = () => {
     console.log("click");
   };
 
-  //variable de estado y handle para cerrar
-  const handleClosePopup = () => {
-    console.log(isEditProfilePopupOpen);
-    //isEditProfilePopupOpen();
+  //para cerrar
+  const closeAllPopups = () => {
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
   };
 
   return (
@@ -63,14 +60,13 @@ function App() {
       <div className="page">
         <Header />
         <Main
-          onclose={handleClosePopup}
           isOpenProfile={isEditProfilePopupOpen}
           onEditProfileClick={onEditProfileClick}
           isOpenAddPlace={isAddPlacePopupOpen}
           onAddPlaceClick={onAddPlaceClick}
           isOpenAvatar={isEditAvatarPopupOpen}
           onEditAvatarClick={onEditAvatarClick}
-          handleClosePopup={handleClosePopup}
+          closeAllPopups={closeAllPopups}
         />
         <section className="elements">
           {cards.map((item, _id) => {

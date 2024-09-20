@@ -6,10 +6,10 @@ export default function PopupWithForm({
   name,
   title,
   isOpen,
-  handleClosePopup,
+  onClose,
 }) {
   const closePopup = () => {
-    handleClosePopup();
+    onClose();
   };
 
   return (

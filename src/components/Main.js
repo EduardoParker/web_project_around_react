@@ -5,6 +5,7 @@ import buttonProfileUpdate from "../images/Edit_Button.svg";
 import addButtonImage from "../images/Add_Button.svg";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import api from "../utils/Api";
 
 export default function Main({
   onEditProfileClick,
@@ -13,8 +14,20 @@ export default function Main({
   isOpenProfile,
   isOpenAddPlace,
   isOpenAvatar,
-  handleClosePopup,
+  closeAllPopups,
 }) {
+  const [userName, setUserName] = React.useState([]);
+  const [userDescription, setUserDescription] = React.useState([]);
+  const [userAvatar, setUserAvatar] = React.useState([]);
+
+  React.useEffect(() => {
+    api.getInfo().then((user) => {
+      setUserName(user.name);
+      setUserDescription(user.about);
+      setUserAvatar(user.avatar);
+    });
+  }, []);
+
   const handleEditProfileClick = () => {
     onEditProfileClick();
   };
@@ -27,30 +40,13 @@ export default function Main({
     onEditAvatarClick();
   };
 
-  /*const handleEditProfileClick = () => {
-    document.querySelector(".popup_profile").classList.add("popup_opened");
-    //popup.classList.add("popup_opened ");
-  };
-
-  const handleEditAvatarClick = () => {
-    document.querySelector(".popup_avatar").classList.add("popup_opened");
-    //popup.classList.add("popup_opened ");
-  };
-
-  const handleEditAddPlaceClick = () => {
-    document.querySelector(".popup_form_image").classList.add("popup_opened");
-    //popup.classList.add("popup_opened ");
-  };
-*/
-
   return (
     <>
       <PopupWithForm
         name="profile"
         title="Editar perfil"
         isOpen={isOpenProfile}
-        //onClose={isOpenProfile}
-        handleClosePopup={handleClosePopup}
+        onClose={closeAllPopups}
       >
         <fieldset className="form__input">
           <input
@@ -88,6 +84,7 @@ export default function Main({
         name="form_image"
         title="Nuevo Lugar"
         isOpen={isOpenAddPlace}
+        onClose={closeAllPopups}
       >
         <fieldset className="form__input">
           <input
@@ -123,6 +120,7 @@ export default function Main({
         name="avatar"
         title="Cambiar foto de perfil"
         isOpen={isOpenAvatar}
+        onClose={closeAllPopups}
       >
         <fieldset className="form__input">
           <input
@@ -151,7 +149,7 @@ export default function Main({
       <section className="profile">
         <div className="profile__avatar" onClick={handleEditAvatarClick}>
           <img
-            src={profileImage}
+            src={userAvatar}
             alt="imagen de perfil"
             className="profile__image-avatar"
           />
@@ -165,7 +163,7 @@ export default function Main({
         </div>
         <div className="profile__info">
           <div className="profile__info-name">
-            <h1 className="profile__name">Jacques Cousteau</h1>
+            <h1 className="profile__name">{userName}</h1>
             <img
               src={buttonProfileUpdate}
               onClick={handleEditProfileClick}
@@ -173,7 +171,7 @@ export default function Main({
               className="profile__edit-button button"
             />
           </div>
-          <h2 className="profile__info-aboutme">Explorador</h2>
+          <h2 className="profile__info-aboutme">{userDescription}</h2>
         </div>
         <img
           src={addButtonImage}
