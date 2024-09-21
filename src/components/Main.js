@@ -40,7 +40,7 @@ export default function Main({
     onEditProfileClick();
   };
 
-  const handleEditAddPlaceClick = () => {
+  const handleAddPlaceClick = () => {
     onAddPlaceClick();
   };
 
@@ -183,7 +183,7 @@ export default function Main({
         </div>
         <img
           src={addButtonImage}
-          onClick={handleEditAddPlaceClick}
+          onClick={handleAddPlaceClick}
           alt="boton para añadir contenido"
           className="profile__add-button button"
         />
