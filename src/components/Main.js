@@ -1,11 +1,13 @@
 import React from "react";
 import "../blocks/profile.css";
-import profileImage from "../images/profile.jpg";
 import buttonProfileUpdate from "../images/Edit_Button.svg";
 import addButtonImage from "../images/Add_Button.svg";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/Api";
+import "../blocks/page.css";
+import Cards from "./Card";
+import Header from "./Header";
 
 export default function Main({
   onEditProfileClick,
@@ -15,16 +17,22 @@ export default function Main({
   isOpenAddPlace,
   isOpenAvatar,
   closeAllPopups,
+  selectedCard,
+  onCardClick,
 }) {
   const [userName, setUserName] = React.useState([]);
   const [userDescription, setUserDescription] = React.useState([]);
   const [userAvatar, setUserAvatar] = React.useState([]);
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     api.getInfo().then((user) => {
       setUserName(user.name);
       setUserDescription(user.about);
       setUserAvatar(user.avatar);
+      api.getInitialCards().then((cards) => {
+        setCards(cards);
+      });
     });
   }, []);
 
@@ -141,11 +149,11 @@ export default function Main({
           Guardar
         </button>
       </PopupWithForm>
-      <ImagePopup />
-
+      <ImagePopup selectedCard={selectedCard} onClose={closeAllPopups} />
       {
         //empieza apartado de profile main
       }
+      <Header />
       <section className="profile">
         <div className="profile__avatar" onClick={handleEditAvatarClick}>
           <img
@@ -179,6 +187,18 @@ export default function Main({
           alt="boton para añadir contenido"
           className="profile__add-button button"
         />
+      </section>
+      <section className="elements">
+        {cards.map((card) => {
+          return (
+            <Cards
+              card={card}
+              key={card._id}
+              onCardClick={onCardClick}
+              selectedCard={selectedCard}
+            />
+          );
+        })}
       </section>
     </>
   );

@@ -1,23 +1,11 @@
 import React from "react";
-import Header from "./Header.js";
-import Cards from "./Card.js";
-import api from "../utils/Api.js";
 import "../blocks/page.css";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
-//import PopupWithForm from "./PopupWithForm.js";
+import "../pages/index.css";
 
 function App() {
-  const [cards, setCards] = React.useState([]);
-
-  React.useEffect(() => {
-    api.getInitialCards().then((cards) => {
-      setCards(cards);
-    });
-  }, []);
-
   //handles para los popups
-
   //variable de estado y handle popup para perfile
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
@@ -44,21 +32,26 @@ function App() {
     setIsEditAvatarPopupOpen(true);
   };
 
-  const onCardClick = () => {
-    console.log("click");
-  };
-
   //para cerrar
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setSelectedCard(false);
+  };
+
+  //apartado para el zoom popup
+
+  const [selectedCard, setSelectedCard] = React.useState(false);
+
+  const onCardClick = (card) => {
+    setSelectedCard(card);
+    console.log(card);
   };
 
   return (
     <>
       <div className="page">
-        <Header />
         <Main
           isOpenProfile={isEditProfilePopupOpen}
           onEditProfileClick={onEditProfileClick}
@@ -67,19 +60,9 @@ function App() {
           isOpenAvatar={isEditAvatarPopupOpen}
           onEditAvatarClick={onEditAvatarClick}
           closeAllPopups={closeAllPopups}
+          selectedCard={selectedCard}
+          onCardClick={onCardClick}
         />
-        <section className="elements">
-          {cards.map((item, _id) => {
-            return (
-              <Cards
-                name={item.name}
-                link={item.link}
-                key={item._id}
-                onCardClick={onCardClick}
-              />
-            );
-          })}
-        </section>
         <Footer />
       </div>
     </>
