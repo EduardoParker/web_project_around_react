@@ -8,7 +8,9 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
   const avatarInputRef = React.useRef();
 
   React.useEffect(() => {
-    setAvatar(currentUser.avatar);
+    if (currentUser.avatar) {
+      setAvatar(currentUser.avatar);
+    }
   }, [currentUser]);
 
   function handleSubmit(e) {
@@ -16,9 +18,9 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     onUpdateAvatar({ avatar });
   }
 
-  function handleChangeAvatar(e) {
+  /*function handleChangeAvatar(e) {
     setAvatar(e.target.value);
-  }
+  }*/
 
   return (
     <PopupWithForm
@@ -32,7 +34,7 @@ export default function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         <input
           value={avatar}
           ref={avatarInputRef}
-          onChange={handleChangeAvatar}
+          onChange={(e) => setAvatar(e.target.value)}
           type="url"
           className="form__item form__item_avatar-link"
           id="avatar"

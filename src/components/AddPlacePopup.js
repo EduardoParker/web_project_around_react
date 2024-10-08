@@ -22,14 +22,6 @@ export default function AddPlacePopup({
     setLink("");
   }, [cards]);
 
-  function handleInputName(e) {
-    setName(e.target.value);
-  }
-
-  function handleInputLink(e) {
-    setLink(e.target.value);
-  }
-
   return (
     <PopupWithForm
       name="form_image"
@@ -41,7 +33,7 @@ export default function AddPlacePopup({
       <fieldset className="form__input">
         <input
           value={name}
-          onChange={handleInputName}
+          onChange={(e) => setName(e.target.value)}
           type="text"
           className="form__item form__item_title"
           id="title"
@@ -54,7 +46,7 @@ export default function AddPlacePopup({
         <span className="form__error name-error"></span>
         <input
           value={link}
-          onChange={handleInputLink}
+          onChange={(e) => setLink(e.target.value)}
           type="url"
           className="form__item form__item_link"
           id="link"

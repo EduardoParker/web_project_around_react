@@ -16,17 +16,11 @@ export default function EditProfilePopUp({ isOpen, onClose, onUpdateUser }) {
   }
 
   React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
+    if (currentUser.name && currentUser.description) {
+      setName(currentUser.name);
+      setDescription(currentUser.about);
+    }
   }, [currentUser]);
-
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-
-  function handleChangeDescription(e) {
-    setDescription(e.target.value);
-  }
 
   return (
     <PopupWithForm
@@ -39,7 +33,7 @@ export default function EditProfilePopUp({ isOpen, onClose, onUpdateUser }) {
       <fieldset className="form__input">
         <input
           value={name}
-          onChange={handleChangeName}
+          onChange={(e) => setName(e.target.value)}
           type="text"
           className="form__item form__item_name"
           id="name"
@@ -52,7 +46,7 @@ export default function EditProfilePopUp({ isOpen, onClose, onUpdateUser }) {
         <span className="form__error name-error"></span>
         <input
           value={description}
-          onChange={handleChangeDescription}
+          onChange={(e) => setDescription(e.target.value)}
           type="text"
           className="form__item form__item_about-me"
           id="about-me"
