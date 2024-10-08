@@ -150,11 +150,8 @@ function App() {
             cards={cards}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
-            //isOpenProfile={isEditProfilePopupOpen}
             onEditProfileClick={onEditProfileClick}
-            //isOpenAddPlace={isAddPlacePopupOpen}
             onAddPlaceClick={onAddPlaceClick}
-            //isOpenAvatar={isEditAvatarPopupOpen}
             onEditAvatarClick={onEditAvatarClick}
             closeAllPopups={closeAllPopups}
             selectedCard={selectedCard}

@@ -1,6 +1,5 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function AddPlacePopup({
   isOpen,
@@ -8,7 +7,6 @@ export default function AddPlacePopup({
   onAddPlaceSubmit,
   cards,
 }) {
-  //const currentUser = React.useContext(CurrentUserContext);
   const [name, setName] = React.useState([]);
   const [link, setLink] = React.useState([]);
 
