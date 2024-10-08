@@ -7,10 +7,15 @@ export default function PopupWithForm({
   title,
   isOpen,
   onClose,
+  onSubmit,
 }) {
-  const closePopup = () => {
-    onClose();
-  };
+  //const closePopup = () => {
+  //  onClose();
+  //};
+
+  /*const submit = () => {
+    onSubmit();
+  };*/
 
   return (
     <>
@@ -20,11 +25,11 @@ export default function PopupWithForm({
         <div className="popup__container">
           <img
             src={closeIcon}
-            onClick={closePopup}
+            onClick={onClose}
             alt="boton de cierre"
             className="popup__close-button popup__close-button_form"
           />
-          <form className={`popup__form form form_${name}`}>
+          <form className={`popup__form form form_${name}`} onSubmit={onSubmit}>
             <h4 className="form__name">{title}</h4>
             {children}
           </form>
